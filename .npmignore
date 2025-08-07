@@ -1,0 +1,45 @@
+# Source files
+src/
+*.ts
+*.tsx
+!dist/
+
+# Development files
+.swcrc
+.prettierrc
+.prettierignore
+eslint.config.mjs
+tsconfig.json
+bun.lock
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies
+node_modules/
+
+# Build artifacts
+build/
+coverage/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore

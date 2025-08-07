@@ -8,6 +8,17 @@ import { createMethodFactory } from './core/method-factory'
 
 import type { Group, RouteConfig, RouteMethod, TypedMiddleware } from './types'
 
+// Re-export types for convenience
+export type {
+  Group,
+  RouteConfig,
+  RouteMethod,
+  TypedMiddleware,
+  Method,
+  RouteOptions,
+  RouteMeta,
+} from './types'
+
 export class NitroRouter<Ext extends Record<string, unknown> = {}> {
   private router = Router()
   private middlewares: Array<RequestHandler> = []
