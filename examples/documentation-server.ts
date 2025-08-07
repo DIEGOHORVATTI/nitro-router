@@ -68,45 +68,45 @@ Esta documentação foi gerada automaticamente usando as rotas definidas com Nit
     contact: {
       name: 'Diego Horvatti',
       url: 'https://github.com/DIEGOHORVATTI',
-      email: 'diego@example.com'
+      email: 'diego@example.com',
     },
     license: {
       name: 'MIT',
-      url: 'https://opensource.org/licenses/MIT'
-    }
+      url: 'https://opensource.org/licenses/MIT',
+    },
   },
   servers: [
     {
       url: 'http://localhost:3000',
-      description: 'Servidor de desenvolvimento'
+      description: 'Servidor de desenvolvimento',
     },
     {
       url: 'https://api.example.com',
-      description: 'Servidor de produção'
-    }
+      description: 'Servidor de produção',
+    },
   ],
   tags: [
     {
       name: 'Users',
-      description: 'Operações relacionadas a usuários'
+      description: 'Operações relacionadas a usuários',
     },
     {
       name: 'Posts',
-      description: 'Gerenciamento de posts do blog'
+      description: 'Gerenciamento de posts do blog',
     },
     {
       name: 'Files',
-      description: 'Upload e gerenciamento de arquivos'
+      description: 'Upload e gerenciamento de arquivos',
     },
     {
       name: 'Authentication',
-      description: 'Sistema de autenticação'
+      description: 'Sistema de autenticação',
     },
     {
       name: 'Admin',
-      description: 'Rotas administrativas'
-    }
-  ]
+      description: 'Rotas administrativas',
+    },
+  ],
 })
 
 // ===== SERVIDOR DE DOCUMENTAÇÃO =====
@@ -124,8 +124,8 @@ app.get('/', (req, res) => {
         basic: 'http://localhost:3000 - Uso básico',
         middleware: 'http://localhost:3001 - Sistema de middleware',
         files: 'http://localhost:3002 - Upload de arquivos',
-        auth: 'http://localhost:3003 - Autenticação e autorização'
-      }
+        auth: 'http://localhost:3003 - Autenticação e autorização',
+      },
     },
     features: [
       '✅ Type Safety completo',
@@ -136,8 +136,8 @@ app.get('/', (req, res) => {
       '✅ Tratamento de erros',
       '✅ Upload de arquivos',
       '✅ Autenticação JWT',
-      '✅ Autorização por roles'
-    ]
+      '✅ Autorização por roles',
+    ],
   })
 })
 
@@ -209,8 +209,8 @@ app.get('/examples', (req, res) => {
           'GET /api/users/:id - Buscar usuário',
           'POST /api/users - Criar usuário',
           'PUT /api/users/:id - Atualizar usuário',
-          'DELETE /api/users/:id - Deletar usuário'
-        ]
+          'DELETE /api/users/:id - Deletar usuário',
+        ],
       },
       {
         name: 'Sistema de Middleware',
@@ -221,8 +221,8 @@ app.get('/examples', (req, res) => {
           'GET /api/v1/posts - Posts públicos',
           'POST /api/v1/posts - Criar post (auth)',
           'GET /api/v1/admin/posts - Todos posts (admin)',
-          'DELETE /api/v1/admin/posts/:id - Deletar (admin)'
-        ]
+          'DELETE /api/v1/admin/posts/:id - Deletar (admin)',
+        ],
       },
       {
         name: 'Upload de Arquivos',
@@ -233,8 +233,8 @@ app.get('/examples', (req, res) => {
           'POST /api/files - Upload de arquivo',
           'GET /api/files - Listar arquivos',
           'POST /api/files/:id/share - Compartilhar',
-          'DELETE /api/files/:id - Deletar arquivo'
-        ]
+          'DELETE /api/files/:id - Deletar arquivo',
+        ],
       },
       {
         name: 'Autenticação Completa',
@@ -245,15 +245,15 @@ app.get('/examples', (req, res) => {
           'POST /auth/login - Fazer login',
           'POST /auth/register - Registrar',
           'GET /user/me - Meu perfil',
-          'GET /admin/users - Listar usuários (admin)'
-        ]
-      }
+          'GET /admin/users - Listar usuários (admin)',
+        ],
+      },
     ],
     instructions: {
       run: 'Para executar um exemplo: npm run dev examples/<file>',
       test: 'Use Postman, Insomnia ou curl para testar os endpoints',
-      auth: 'Para rotas protegidas use: Authorization: Bearer <token>'
-    }
+      auth: 'Para rotas protegidas use: Authorization: Bearer <token>',
+    },
   })
 })
 
@@ -264,21 +264,21 @@ app.get('/tutorial', (req, res) => {
       step1: {
         title: '1. Instalação',
         code: 'npm install nitro-router zod express @types/express',
-        description: 'Instale as dependências necessárias'
+        description: 'Instale as dependências necessárias',
       },
       step2: {
         title: '2. Import básico',
         code: `import { NitroRouter } from 'nitro-router'
 import { z } from 'zod'
 import express from 'express'`,
-        description: 'Importe as bibliotecas necessárias'
+        description: 'Importe as bibliotecas necessárias',
       },
       step3: {
         title: '3. Criar router',
         code: `const router = new NitroRouter()
 const app = express()
 app.use(express.json())`,
-        description: 'Crie uma instância do router e configure o Express'
+        description: 'Crie uma instância do router e configure o Express',
       },
       step4: {
         title: '4. Definir schema',
@@ -286,7 +286,7 @@ app.use(express.json())`,
   name: z.string().min(2),
   email: z.string().email()
 })`,
-        description: 'Defina schemas de validação com Zod'
+        description: 'Defina schemas de validação com Zod',
       },
       step5: {
         title: '5. Criar rota',
@@ -296,22 +296,22 @@ app.use(express.json())`,
   body: UserSchema,
   summary: 'Criar usuário'
 })`,
-        description: 'Crie rotas tipadas com validação automática'
+        description: 'Crie rotas tipadas com validação automática',
       },
       step6: {
         title: '6. Usar no Express',
         code: `app.use('/api', router.export())
 app.listen(3000)`,
-        description: 'Integre o router ao Express e inicie o servidor'
-      }
+        description: 'Integre o router ao Express e inicie o servidor',
+      },
     },
     nextSteps: [
       'Veja os exemplos em /examples',
       'Leia a documentação em /docs',
       'Teste as APIs com Postman',
       'Explore middleware tipado',
-      'Configure documentação OpenAPI'
-    ]
+      'Configure documentação OpenAPI',
+    ],
   })
 })
 

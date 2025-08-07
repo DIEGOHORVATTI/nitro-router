@@ -20,15 +20,19 @@ console.log('✅ NitroRouter instanciado:', router instanceof NitroRouter)
 
 // Teste 5: Definir uma rota simples
 const TestSchema = z.object({
-  message: z.string()
+  message: z.string(),
 })
 
-router.get('/test', async (ctx, res) => {
-  return { message: 'Hello World!' }
-}, {
-  summary: 'Rota de teste',
-  tags: ['Test']
-})
+router.get(
+  '/test',
+  async (ctx, res) => {
+    return { message: 'Hello World!' }
+  },
+  {
+    summary: 'Rota de teste',
+    tags: ['Test'],
+  }
+)
 
 console.log('✅ Rota definida com sucesso')
 
@@ -38,7 +42,7 @@ router.use({
     console.log('Middleware executado')
     next()
   },
-  inject: (req) => ({ timestamp: Date.now() })
+  inject: (req) => ({ timestamp: Date.now() }),
 })
 
 console.log('✅ Middleware adicionado com sucesso')
