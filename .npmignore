@@ -4,6 +4,9 @@ src/
 *.tsx
 !dist/
 
+# Examples
+examples/
+
 # Development files
 .swcrc
 .prettierrc
@@ -28,6 +31,11 @@ node_modules/
 # Build artifacts
 build/
 coverage/
+
+# Tests
+*.test.*
+*.spec.*
+__tests__/
 
 # Environment
 .env

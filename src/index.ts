@@ -19,6 +19,13 @@ export type {
   RouteMeta,
 } from './types'
 
+// Re-export utility functions
+export { ok, err, match, error } from './lib/result'
+export type { Ok, Err, Result, HttpErrorDetails } from './lib/result'
+
+// Re-export docs functions
+export { default as openApi, registerRoute } from './lib/docs'
+
 export class NitroRouter<Ext extends Record<string, unknown> = {}> {
   private router = Router()
   private middlewares: Array<RequestHandler> = []
