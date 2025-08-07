@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Initial release of nitro-router
 - TypeScript-first Express.js router with automatic validation
 - Typed middleware support
@@ -15,28 +16,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Zod schema validation integration
 
 ### Changed
+
 - N/A
 
 ### Deprecated
+
 - N/A
 
 ### Removed
+
 - N/A
 
 ### Fixed
+
 - N/A
 
 ### Security
+
 - N/A
 
 ## [0.1.2] - 2024-12-07
 
 ### Added
+
 - Initial public release
 - Core router functionality
 - TypeScript definitions
 - Basic documentation
 
 ### Fixed
+
 - Package export configuration
 - Build process improvements
