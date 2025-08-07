@@ -8,7 +8,7 @@ import { createMethodFactory } from './core/method-factory'
 
 import type { Group, RouteConfig, RouteMethod, TypedMiddleware } from './types'
 
-export class RouteBuilder<Ext extends Record<string, unknown> = {}> {
+export class NitroRouter<Ext extends Record<string, unknown> = {}> {
   private router = Router()
   private middlewares: Array<RequestHandler> = []
   private prefix: string
@@ -26,11 +26,11 @@ export class RouteBuilder<Ext extends Record<string, unknown> = {}> {
   use<MExt extends Record<string, unknown>>(typed: TypedMiddleware<MExt>) {
     this.middlewares.push(createUseHandler(typed))
 
-    return this as RouteBuilder<Ext & MExt>
+    return this as NitroRouter<Ext & MExt>
   }
 
   group(options: Group) {
-    return new RouteBuilder<Ext>({
+    return new NitroRouter<Ext>({
       prefix: this.prefix + (options.prefix ?? ''),
       tags: [...this.tags, ...(options.tags ?? [])],
       router: this.router,
