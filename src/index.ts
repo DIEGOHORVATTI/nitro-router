@@ -18,3 +18,7 @@ export { default as openApi, registerRoute } from './lib/docs'
 
 // Re-export core functions
 export { NitroRouter } from './nitro-router'
+
+// Also export NitroRouter as default for easier importing
+import { NitroRouter as NR } from './nitro-router'
+export default NR

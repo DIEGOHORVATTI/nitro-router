@@ -1,22 +1,30 @@
 {
   "jsc": {
-    "target": "esnext",
+    "target": "es2020",
     "parser": {
       "syntax": "typescript",
-      "tsx": false
+      "tsx": false,
+      "decorators": true,
+      "dynamicImport": true
     },
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
     "transform": {
-      "react": {
-        "runtime": "automatic"
-      }
-    }
+      "legacyDecorator": true,
+      "decoratorMetadata": true
+    },
+    "externalHelpers": false,
+    "loose": false,
+    "preserveAllComments": false
   },
   "module": {
-    "type": "commonjs"
+    "type": "commonjs",
+    "strict": true,
+    "strictMode": true,
+    "noInterop": false
   },
-  "sourceMaps": false
+  "sourceMaps": false,
+  "minify": false
 }

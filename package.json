@@ -5,6 +5,7 @@
   "license": "MIT",
   "version": "0.1.2",
   "main": "dist/src/index.js",
+  "module": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "files": [
     "dist/src/**/*",
@@ -14,14 +15,18 @@
   "exports": {
     ".": {
       "require": "./dist/src/index.js",
-      "types": "./dist/src/index.d.ts"
+      "import": "./dist/src/index.js",
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
     },
     "./lib/result": {
       "require": "./dist/src/lib/result.js",
+      "import": "./dist/src/lib/result.js",
       "types": "./dist/src/lib/result.d.ts"
     },
     "./lib/docs": {
       "require": "./dist/src/lib/docs.js",
+      "import": "./dist/src/lib/docs.js",
       "types": "./dist/src/lib/docs.d.ts"
     }
   },
