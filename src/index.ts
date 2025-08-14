@@ -1,14 +1,4 @@
-import type { RequestHandler } from 'express'
-
-import { Router } from 'express'
-
-import { createUseHandler } from './core/use'
-import { createRegister } from './core/register'
-import { createMethodFactory } from './core/method-factory'
-
-import type { Group, RouteConfig, RouteMethod, TypedMiddleware } from './types'
-
-// Re-export types for convenience
+// re-export types and interfaces
 export type {
   Group,
   RouteConfig,
@@ -26,57 +16,5 @@ export type { Ok, Err, Result, HttpErrorDetails } from './lib/result'
 // Re-export docs functions
 export { default as openApi, registerRoute } from './lib/docs'
 
-export class NitroRouter<Ext extends Record<string, unknown> = {}> {
-  private router = Router()
-  private middlewares: Array<RequestHandler> = []
-  private prefix: string
-  private name: string
-  private tags: string[]
-
-  constructor(options?: Partial<RouteConfig>) {
-    this.prefix = options?.prefix ?? ''
-    this.name = options?.name ?? ''
-    this.tags = options?.tags ?? []
-    this.router = options?.router ?? Router()
-    this.middlewares = options?.middlewares ?? []
-  }
-
-  use<MExt extends Record<string, unknown>>(typed: TypedMiddleware<MExt>) {
-    this.middlewares.push(createUseHandler(typed))
-
-    return this as NitroRouter<Ext & MExt>
-  }
-
-  group(options: Group) {
-    return new NitroRouter<Ext>({
-      prefix: this.prefix + (options.prefix ?? ''),
-      tags: [...this.tags, ...(options.tags ?? [])],
-      router: this.router,
-      name: this.name,
-      middlewares: this.middlewares,
-    })
-  }
-
-  get _register() {
-    return createRegister<Ext>(this.middlewares, this.router, this.prefix, this.tags)
-  }
-
-  get: RouteMethod<Ext> = (path, handler, options) =>
-    createMethodFactory<Ext>(this._register).get(path, handler, options)
-
-  post: RouteMethod<Ext> = (path, handler, options) =>
-    createMethodFactory<Ext>(this._register).post(path, handler, options)
-
-  put: RouteMethod<Ext> = (path, handler, options) =>
-    createMethodFactory<Ext>(this._register).put(path, handler, options)
-
-  patch: RouteMethod<Ext> = (path, handler, options) =>
-    createMethodFactory<Ext>(this._register).patch(path, handler, options)
-
-  delete: RouteMethod<Ext> = (path, handler, options) =>
-    createMethodFactory<Ext>(this._register).delete(path, handler, options)
-
-  export() {
-    return this.router
-  }
-}
+// Re-export core functions
+export { NitroRouter } from './nitro-router'
