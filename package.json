@@ -9,6 +9,7 @@
   "types": "index.d.ts",
   "files": [
     "dist/src/**/*",
+    "dist/src/**/*.d.ts",
     "index.d.ts",
     "README.md",
     "LICENSE"
@@ -19,6 +20,16 @@
       "import": "./dist/src/index.js",
       "types": "./index.d.ts",
       "default": "./dist/src/index.js"
+    },
+    "./types": {
+      "require": "./dist/src/types.js",
+      "import": "./dist/src/types.js",
+      "types": "./dist/src/types.d.ts"
+    },
+    "./nitro-router": {
+      "require": "./dist/src/nitro-router.js",
+      "import": "./dist/src/nitro-router.js",
+      "types": "./dist/src/nitro-router.d.ts"
     },
     "./lib/result": {
       "require": "./dist/src/lib/result.js",
@@ -92,7 +103,7 @@
   "scripts": {
     "dev": "bun run --watch src/index.ts",
     "start": "node dist/src/index.js",
-    "build": "swc src -d dist && tsc --emitDeclarationOnly --declaration --outDir dist",
+    "build": "swc src -d dist && tsc --emitDeclarationOnly --declaration --declarationDir dist",
     "build:clean": "rm -rf dist && npm run build",
     "prepublishOnly": "npm run build:clean",
     "lint": "eslint --ext .ts,.tsx .",

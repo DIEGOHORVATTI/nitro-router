@@ -1,6 +1,7 @@
 import express from 'express'
 import { z } from 'zod'
-import { NitroRouter } from '../src'
+
+import { NitroRouter } from '../dist'
 
 const app = express()
 app.use(express.json())

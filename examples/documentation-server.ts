@@ -1,6 +1,6 @@
 import express from 'express'
-import { NitroRouter } from '../src'
-import openApi from '../src/lib/docs'
+
+import { openApi } from '../dist'
 
 const app = express()
 app.use(express.json())

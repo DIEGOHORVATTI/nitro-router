@@ -1,8 +1,7 @@
 import express from 'express'
 import { z } from 'zod'
-import { NitroRouter } from '../src'
-import { error } from '../src/lib/result'
-import type { TypedMiddleware } from '../src'
+
+import { NitroRouter, error, type TypedMiddleware } from '../dist'
 
 const app = express()
 app.use(express.json())
