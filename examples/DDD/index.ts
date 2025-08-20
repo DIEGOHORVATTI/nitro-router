@@ -1,9 +1,15 @@
 import express from 'express'
 
-import { NitroRouter, openApi, z } from '../../'
+import { NitroRouter, z } from '../../src'
+
+import apiDocumentationHTML from './core/utils/apiDocumentationHTML'
+import errorHandler from './core/infra/http/middleware/errorHandler'
 
 const app = express()
 app.use(express.json())
+
+const PORT = 8000
+const url = `http://localhost:${PORT}`
 
 // Criar uma instância do NitroRouter
 const route = new NitroRouter()
@@ -49,7 +55,7 @@ route.get(
   {
     summary: 'Buscar usuário por ID',
     params: z.object({
-      id: z.string().uuid(),
+      id: z.string(),
     }),
     query: z.object({
       id: z.string(),
@@ -61,48 +67,28 @@ route.get(
 // Exportar o router para o Express
 app.use(route.export())
 
-// Configurar a documentação OpenAPI
-// Gerar documentação OpenAPI
-const documentation = openApi({
-  openapi: '3.0.0',
-  info: {
-    title: 'Minha API',
-    version: '1.0.0',
-    description: 'Documentação da API',
-  },
-  servers: [{ url: 'http://localhost:8000', description: 'Servidor de desenvolvimento' }],
-})
+app.use(errorHandler)
 
-// Endpoint para retornar a documentação OpenAPI
 app.get('/docs', (_, res) => {
-  res.send(`
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>API Docs</title>
-  </head>
-  <body>
-    <div id="app"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
-    <script>
-      const blob = new Blob([JSON.stringify(${JSON.stringify(documentation)})], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      Scalar.createApiReference('#app', { url });
-    </script>
-  </body>
-</html>
-  `)
+  res.send(
+    apiDocumentationHTML({
+      openapi: '3.0.0',
+      info: {
+        title: 'Minha API',
+        version: '1.0.0',
+        description: 'Documentação da API',
+      },
+      servers: [{ url, description: 'Servidor de desenvolvimento' }],
+    })
+  )
 })
 
-const PORT = 8000
 app.listen(PORT, () => {
   console.log(`
-─────────────────────────୨ৎ────────────────────────
-ྀི Server: http://localhost:${PORT}
+───────────────────────────୨ৎ────────────────────────
+𖤍 Server: ${url}
 
-𖤍 Documentation: http://localhost:${PORT}/api/docs
-─────────────────────────୨ৎ────────────────────────
+𖤍 Documentation: ${url}/docs
+───────────────────────────୨ৎ────────────────────────
 `)
 })

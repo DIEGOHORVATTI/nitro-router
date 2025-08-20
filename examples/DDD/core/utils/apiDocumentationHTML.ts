@@ -1,6 +1,6 @@
 import type { OpenAPIObjectConfig } from '@asteasolutions/zod-to-openapi/dist/v3.0/openapi-generator'
 
-import { openApi } from 'nitro-router'
+import { openApi } from '../../../../src'
 
 export default function apiDocumentationHTML(documentation: OpenAPIObjectConfig) {
   const apiDocumentation = openApi(documentation)

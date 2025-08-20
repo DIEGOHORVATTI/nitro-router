@@ -28,9 +28,8 @@ export class HttpError extends Error {
     this.name = getReasonPhrase(status)
     this.status = status
     this.details = details
-    this.stack = details
   }
 }
 
-export const error = (code: keyof typeof StatusCodes, error: string, details?: string) =>
-  new HttpError({ code, message: error, details })
+export const error = (code: keyof typeof StatusCodes, message: string, details?: string) =>
+  new HttpError({ code, message, details })

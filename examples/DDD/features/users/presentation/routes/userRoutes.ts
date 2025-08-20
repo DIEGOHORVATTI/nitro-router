@@ -1,4 +1,4 @@
-import NR, { z } from '../../../../../../'
+import NR, { z } from '../../../../../../src'
 
 import { userRepositoryImpl } from '../../infrastructure/userRepositoryImpl'
 

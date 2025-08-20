@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { HttpError } from 'nitro-router'
+import { HttpError } from '../../../../../../src'
 
 export default function errorHandler(
   err: Error,

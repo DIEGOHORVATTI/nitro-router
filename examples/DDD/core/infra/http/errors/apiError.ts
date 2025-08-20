@@ -1,4 +1,4 @@
-import { error } from 'nitro-router'
+import { error } from '../../../../../../src'
 
 export const badRequest = (message: string) => error('BAD_REQUEST', message)
 export const notFound = (message: string) => error('NOT_FOUND', message)

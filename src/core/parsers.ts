@@ -7,11 +7,13 @@ export function createParser<T extends 'body' | 'query' | 'params'>(
   key: T,
   schema: ZodType
 ): RequestHandler {
-  return (req, _res, next) => {
+  return (req, _req, next) => {
     const result = schema.safeParse(req[key])
 
     if (!result.success) {
-      const errorMessage = result.error.issues[0].message || `Invalid ${key}`
+      const firstIssue = result.error.issues[0]
+
+      const errorMessage = `'${firstIssue.path}' ${firstIssue.message}` || `Invalid ${key}`
 
       console.error(`Validation error for ${key}:`, result.error.issues, req[key])
 
