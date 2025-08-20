@@ -1,12 +1,9 @@
-import type { ZodSchema } from 'zod'
+import type { ZodType } from 'zod'
 import type { RequestHandler } from 'express'
 
 import { error } from '../lib/result'
 
-export function createParser<T extends 'body' | 'query'>(
-  key: T,
-  schema: ZodSchema
-): RequestHandler {
+export function createParser<T extends 'body' | 'query'>(key: T, schema: ZodType): RequestHandler {
   return (req, _res, next) => {
     const result = schema.safeParse(req[key])
 

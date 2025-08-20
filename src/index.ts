@@ -1,3 +1,10 @@
+// Automatically extend Zod with OpenAPI functionality
+import { z } from 'zod'
+import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi'
+
+// Extend Zod with OpenAPI functionality automatically when nitro-router is imported
+extendZodWithOpenApi(z)
+
 // re-export types and interfaces
 export type {
   Group,
@@ -22,3 +29,6 @@ export { NitroRouter } from './nitro-router'
 // Also export NitroRouter as default for easier importing
 import { NitroRouter as NR } from './nitro-router'
 export default NR
+
+// Re-export z for convenience so users don't need to import zod separately
+export { z }
