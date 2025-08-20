@@ -17,7 +17,7 @@ export type {
 } from './types'
 
 // Re-export utility functions
-export { ok, err, match, error } from './lib/result'
+export { ok, err, match, error, HttpError } from './lib/result'
 export type { Ok, Err, Result, HttpErrorDetails } from './lib/result'
 
 // Re-export docs functions

@@ -18,7 +18,7 @@ export interface HttpErrorDetails {
   details?: string
 }
 
-class HttpError extends Error {
+export class HttpError extends Error {
   status: number
   details?: string
 
