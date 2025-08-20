@@ -23,6 +23,10 @@ export function createRegister<Ext>(
       middleware.push(createParser('query', options.query))
     }
 
+    if (options?.params) {
+      middleware.push(createParser('params', options.params))
+    }
+
     if (options?.injectContext) {
       for (const typed of options.injectContext) {
         middleware.push(createUseHandler(typed))

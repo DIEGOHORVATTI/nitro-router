@@ -3,7 +3,10 @@ import type { RequestHandler } from 'express'
 
 import { error } from '../lib/result'
 
-export function createParser<T extends 'body' | 'query'>(key: T, schema: ZodType): RequestHandler {
+export function createParser<T extends 'body' | 'query' | 'params'>(
+  key: T,
+  schema: ZodType
+): RequestHandler {
   return (req, _res, next) => {
     const result = schema.safeParse(req[key])
 

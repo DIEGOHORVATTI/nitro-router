@@ -104,10 +104,12 @@ type OptionalZodType = ZodType<unknown> | undefined
 export type RouteOptions<
   BodySchema extends OptionalZodType = undefined,
   QuerySchema extends OptionalZodType = undefined,
+  ParamsSchema extends OptionalZodType = undefined,
   LocalMiddlewares extends TypedMiddleware<any>[] = [],
 > = Partial<{
   body: BodySchema
   query: QuerySchema
+  params: ParamsSchema
   contentType: 'application/json' | 'multipart/form-data'
   tags: Array<string>
   summary: string
@@ -129,6 +131,7 @@ type BaseRoute<Ext, ExtraArgs extends any[] = []> = <
   Path extends string,
   BodySchema extends ZodType,
   QuerySchema extends ZodType,
+  ParamsSchema extends ZodType,
   LocalMiddlewares extends TypedMiddleware<any>[] = [],
 >(
   ...args: [
@@ -140,7 +143,7 @@ type BaseRoute<Ext, ExtraArgs extends any[] = []> = <
       RouteMeta<Path, BodySchema, QuerySchema>['Params'],
       RouteMeta<Path, BodySchema, QuerySchema>['Query']
     >,
-    RouteOptions<BodySchema, QuerySchema, LocalMiddlewares>,
+    RouteOptions<BodySchema, QuerySchema, ParamsSchema, LocalMiddlewares>,
   ]
 ) => void
 
