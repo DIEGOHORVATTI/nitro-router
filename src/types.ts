@@ -94,12 +94,12 @@ export type RouteMeta<
   Query extends ZodType<unknown> | undefined,
 > = {
   Path: Path
-  Params: ExtractParams<Path>
+  Params: InferBody<BodySchema> & ExtractParams<Path>
   Body: InferBody<BodySchema>
   Query: InferBody<Query>
 }
 
-type OptionalZodType = ZodType<unknown> | undefined
+export type OptionalZodType = ZodType<unknown> | undefined
 
 export type RouteOptions<
   BodySchema extends OptionalZodType = undefined,

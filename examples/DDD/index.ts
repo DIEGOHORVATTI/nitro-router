@@ -54,12 +54,6 @@ route.get(
   },
   {
     summary: 'Buscar usuário por ID',
-    params: z.object({
-      id: z.string(),
-    }),
-    query: z.object({
-      id: z.string(),
-    }),
     tags: ['Users'],
   }
 )

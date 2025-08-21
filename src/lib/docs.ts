@@ -13,6 +13,7 @@ type RegisteredRoute = Pick<
   path: string
   body?: ZodSchema
   query?: ZodSchema
+  params?: ZodSchema
 }
 
 const registeredRoutes: Array<RegisteredRoute> = []
@@ -26,6 +27,7 @@ export default function openApi(config: OpenAPIObjectConfig) {
       path,
       body,
       query,
+      params,
       summary,
       contentType = 'application/json',
       description,
@@ -46,6 +48,7 @@ export default function openApi(config: OpenAPIObjectConfig) {
             },
           }),
           query: query as ZodObject<any>,
+          params: params as ZodObject<any>,
         },
         responses: {
           200: { description: 'Success' },

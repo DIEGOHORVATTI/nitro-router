@@ -1,5 +1,6 @@
 import type { ZodType } from 'zod'
 import type { RequestHandler } from 'express'
+import { z } from 'zod'
 
 import { error } from '../lib/result'
 
@@ -23,4 +24,29 @@ export function createParser<T extends 'body' | 'query' | 'params'>(
     req[key] = result.data
     next()
   }
+}
+
+/**
+ * Extrai parâmetros da URL e cria um schema Zod para validação
+ * @param path Caminho da URL (ex: '/users/:id')
+ * @returns Schema Zod para validação dos parâmetros ou undefined se não houver parâmetros
+ */
+export function createParamsSchemaFromPath(path: string) {
+  // Extrair todos os segmentos do caminho que começam com ':'
+  const params = path
+    .split('/')
+    .filter((segment) => segment.startsWith(':'))
+    .map((segment) => segment.substring(1))
+
+  if (params.length === 0) {
+    return undefined
+  }
+
+  // Criar um objeto de schema para cada parâmetro
+  const schemaObj = params.reduce<Record<string, z.ZodString>>((acc, param) => {
+    acc[param] = z.string()
+    return acc
+  }, {})
+
+  return z.object(schemaObj)
 }

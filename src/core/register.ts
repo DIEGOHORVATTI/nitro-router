@@ -1,6 +1,6 @@
 import type { Router, RequestHandler } from 'express'
 
-import { createParser } from './parsers'
+import { createParser, createParamsSchemaFromPath } from './parsers'
 import { createUseHandler } from './use'
 import { registerRoute } from '../lib/docs'
 
@@ -15,6 +15,7 @@ export function createRegister<Ext>(
   return (method, path, handler, options) => {
     const middleware: Array<RequestHandler> = []
 
+    // Adicionar validadores para body, query e params
     if (options?.body) {
       middleware.push(createParser('body', options.body))
     }
@@ -23,10 +24,17 @@ export function createRegister<Ext>(
       middleware.push(createParser('query', options.query))
     }
 
-    if (options?.params) {
-      middleware.push(createParser('params', options.params))
+    let paramsSchema = options?.params
+
+    if (!paramsSchema) {
+      paramsSchema = createParamsSchemaFromPath(path)
     }
 
+    if (paramsSchema) {
+      middleware.push(createParser('params', paramsSchema))
+    }
+
+    // Processar injeção de contexto
     if (options?.injectContext) {
       for (const typed of options.injectContext) {
         middleware.push(createUseHandler(typed))
@@ -35,10 +43,12 @@ export function createRegister<Ext>(
 
     const fullPath = prefix + path
 
+    // Registrar rota na documentação OpenAPI
     registerRoute({
       method,
       path: fullPath,
       ...options,
+      params: paramsSchema, // Incluir schema de parâmetros (definido ou inferido)
       tags: options?.tags ?? tags,
       prefix,
     })
